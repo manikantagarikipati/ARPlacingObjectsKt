@@ -1,39 +1,35 @@
 package com.geekmk.arplacingobjectskt
 
+import android.app.AlertDialog
 import android.os.Bundle
-import android.support.design.widget.Snackbar
-import android.support.v7.app.AppCompatActivity
-import android.view.Menu
-import android.view.MenuItem
-
+import com.geekmk.arplacingobjectskt.arcomponents.BaseARActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+/**
+ * Created by manikanta.garikipati on 07/04/18.
+ */
+class MainActivity : BaseARActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        setSupportActionBar(toolbar)
-
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
-        }
+        addObject.setOnClickListener { showPopUp() }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return true
-    }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        return when (item.itemId) {
-            R.id.action_settings -> true
-            else -> super.onOptionsItemSelected(item)
-        }
+    /**
+     * Show selection of existing local objects
+     */
+    private fun showPopUp() {
+        val builder = AlertDialog.Builder(this)
+        val itemsList = arrayOf<CharSequence>("Coffee mug", "Flowers", "Smile Emoji")
+        builder.setTitle("Choose an object")
+                .setItems(itemsList) { _, which ->
+                    when (which) {
+                        0 -> placeObject("file:///android_asset/mug/object_coffee_mug.vrx")
+                        1 -> placeObject("file:///android_asset/flower/object_flowers.vrx")
+                        2 -> placeObject("file:///android_asset/smile_emoji/emoji_smile.vrx")
+                    }
+                }
+        builder.create().show()
     }
 }
