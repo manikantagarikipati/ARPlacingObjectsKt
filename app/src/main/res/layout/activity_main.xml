@@ -25,7 +25,8 @@
     android:layout_height="wrap_content"
     android:layout_gravity="top"/>
 
-  <Button
+  <ImageButton
+    android:layout_margin="@dimen/_16dp"
     android:visibility="gone"
     tools:visibility="visible"
     android:id="@+id/addObject"
@@ -33,7 +34,7 @@
     android:layout_height="wrap_content"
     android:layout_gravity="bottom|center_horizontal"
     android:gravity="center"
-    android:text="Hey!! try adding Objects"
+    android:background="@mipmap/viro_launcher"
     />
 
 </FrameLayout>
